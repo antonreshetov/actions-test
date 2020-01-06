@@ -12,8 +12,7 @@ jobs:
       - run: mkdir -p path/to/artifact
       - run: echo hello > path/to/artifact/world.txt
       
-      - name: Get tag name
-        uses: olegtarasov/get-tag@v1
+      - uses: olegtarasov/get-tag@v1
         id: tagName
         
       - uses: actions/upload-artifact@v1
