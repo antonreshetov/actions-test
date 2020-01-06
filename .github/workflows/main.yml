@@ -12,16 +12,10 @@ jobs:
       - run: mkdir -p path/to/artifact
       - run: echo hello > path/to/artifact/world.txt
       
-      - name: Extract tag name
-        id: tag
-        uses: actions/github-script@0.2.0
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            return context.payload.ref.replace(/\/refs\/tags\//, '');
-      - name: Echo
-        run: echo ${{ steps.tag.outputs.result }}
-        
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
+        run: echo ${{ steps.get_version.outputs.VERSION }}
 #       - uses: actions/upload-artifact@v1
 #         with:
 #           name: my-artifact-${{ steps.tagName.outputs.tag }}
