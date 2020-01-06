@@ -30,7 +30,7 @@ jobs:
         run: echo ${{ steps.previoustag.outputs.tag }}
 
       - name: macOS
-        if: startsWith(${{ matrix.os }}, 'macOS')
+        if: startsWith(matrix.os, 'macOS')
         run: echo macOS
         
       - name: macOS
