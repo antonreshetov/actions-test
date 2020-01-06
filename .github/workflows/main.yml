@@ -19,6 +19,13 @@ jobs:
         run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
       - name: Echo
         run: echo ${{ steps.get_version.outputs.VERSION }}
+      - name: 'Get Previous tag'
+        id: previoustag
+        uses: "WyriHaximus/github-action-get-previous-tag@master"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Echo tag
+        run: echo ${{ steps.previoustag.outputs.tag }}
 #       - uses: actions/upload-artifact@v1
 #         with:
 #           name: my-artifact-${{ steps.tagName.outputs.tag }}
