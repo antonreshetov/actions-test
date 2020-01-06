@@ -12,10 +12,15 @@ jobs:
       - run: mkdir -p path/to/artifact
       - run: echo hello > path/to/artifact/world.txt
       
-      - uses: olegtarasov/get-tag@v1
-        id: tagName
+      - name: Extract tag name
+        id: tag
+        uses: actions/github-script@0.2.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            return context.payload.ref.replace(/\/refs\/tags\//, '');
       - name: Echo
-        run: echo ${{ steps.tagName }}
+        run: echo ${{ steps.tag.outputs.result }}
         
 #       - uses: actions/upload-artifact@v1
 #         with:
