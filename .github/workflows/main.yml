@@ -15,7 +15,7 @@ jobs:
       - uses: olegtarasov/get-tag@v1
         id: tagName
       - name: Echo
-        run: echo ${{ steps.tagName.outputs.tag }}
+        run: echo ${{ steps.tagName }}
         
 #       - uses: actions/upload-artifact@v1
 #         with:
