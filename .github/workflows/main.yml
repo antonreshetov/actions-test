@@ -16,26 +16,30 @@ jobs:
       - run: mkdir -p path/to/artifact
       - run: echo hello > path/to/artifact/world.txt
       
-      # - name: Get the version
-      #   id: get_version
-      #   run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
-      # - name: Echo
-      #   run: echo ${{ steps.get_version.outputs.VERSION }}
-      - name: 'Get Previous tag'
-        id: previoustag
-        uses: "WyriHaximus/github-action-get-previous-tag@master"
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-      - name: Echo tag
-        run: echo ${{ steps.previoustag.outputs.tag }}
+      - name: Get the version
+        id: get_version
+        # run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+        run: echo ::set-output name=VERSION::cat package.json | grep version | head -1 | awk -F= "{ print $2 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]'
 
-      - name: macOS
-        if: startsWith(matrix.os, 'macOS')
-        run: echo macOS
+      - name: Echo
+        run: echo ${{ steps.get_version.outputs.VERSION }}
+
+
+      # - name: 'Get Previous tag'
+      #   id: previoustag
+      #   uses: "WyriHaximus/github-action-get-previous-tag@master"
+      #   env:
+      #     GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      # - name: Echo tag
+      #   run: echo ${{ steps.previoustag.outputs.tag }}
+
+      # - name: macOS
+      #   if: startsWith(matrix.os, 'macOS')
+      #   run: echo macOS
         
-      - name: macOS
-        if: startsWith(matrix.os, 'ubuntu')
-        run: echo ubuntu
+      # - name: macOS
+      #   if: startsWith(matrix.os, 'ubuntu')
+      #   run: echo ubuntu
 #       - uses: actions/upload-artifact@v1
 #         with:
 #           name: my-artifact-${{ steps.tagName.outputs.tag }}
