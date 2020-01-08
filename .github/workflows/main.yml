@@ -26,7 +26,7 @@ jobs:
 
       - name: Set var
         run: |
-          echo (node -p "require('./package.json').version") > MY_VAR
+          echo "(node -p "require('./package.json').version") > MY_VAR"
           echo "::set-env name=action_state::$(cat MY_VAR)"
           echo ${{ env.action_state }}
       
