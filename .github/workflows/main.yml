@@ -9,20 +9,16 @@ jobs:
 
     strategy:
       matrix:
-        os: [windows-latest]
+        os: [ubuntu-latest, windows-latest]
 
     steps:
       - uses: actions/checkout@v1
-      - run: mkdir -p path/to/artifact
-      - run: echo hello > path/to/artifact/world.txt
-      
-      # - name: Get the version
-      #   id: get_version
-        # run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
-        # run: echo ::set-output name=VERSION::$(grep '"version"' package.json | cut -d '"' -f 4)
-
-      # - name: Echo
-      #   run: echo ${{ steps.get_version.outputs.VERSION }}
+    
+      - name: Create assets
+        run: mkdir -p path/to/artifact
+        run: echo hello > path/to/artifact/world.txt
+        run: echo hello > path/to/artifact/world1.txt
+        run: echo hello > path/to/artifact/world2.txt
 
       - name: Set var
         run: (node -p "require('./package.json').version") > MY_VAR
