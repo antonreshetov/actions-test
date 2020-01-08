@@ -46,7 +46,6 @@ jobs:
         prerelease: false
     
     - name: Upload Release 1st Asset
-      if: startsWith(matrix.os, 'ubuntu')
       uses: actions/upload-release-asset@v1.0.1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -57,7 +56,6 @@ jobs:
         asset_content_type: text/plain
 
     - name: Upload Release 2nd Asset
-      if: startsWith(matrix.os, 'windows')
       uses: actions/upload-release-asset@v1.0.1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
