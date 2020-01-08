@@ -24,6 +24,9 @@ jobs:
       - name: Echo
         run: echo ${{ steps.get_version.outputs.VERSION }}
 
+      - name: Set var
+        run: (node -p "require('./package.json').version") > MY_VAR
+
 
       # - name: 'Get Previous tag'
       #   id: previoustag
@@ -39,8 +42,8 @@ jobs:
         
       # - name: macOS
       #   if: startsWith(matrix.os, 'ubuntu')
-      #   run: echo ubuntu
-#       - uses: actions/upload-artifact@v1
-#         with:
-#           name: my-artifact-${{ steps.tagName.outputs.tag }}
-#           path: path/to/artifact
+        # run: echo ubuntu
+      - uses: actions/upload-artifact@v1
+        with:
+          name: my-artifact-${{ cat MY_VAR }}
+          path: path/to/artifact
