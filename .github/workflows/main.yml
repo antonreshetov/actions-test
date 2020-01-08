@@ -28,7 +28,7 @@ jobs:
         run: (node -p "require('./package.json').version") > MY_VAR
       
       - name: ENV
-        run: echo ::set-env name=action_state::$(node -p "require('./package.json').version")
+        run: echo ::set-env name=action_state::$(node -p "require('./package.json').version")"
         # env:
         #   MY_ENV: ''
       
