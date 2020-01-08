@@ -20,8 +20,6 @@ jobs:
       - run: echo hello > path/to/artifact/world.txt
       - run: echo hello > path/to/artifact/world1.txt
 
-      - run: ls -l
-
       - name: Set var
         run: (node -p "require('./package.json').version") > MY_VAR
       
