@@ -29,8 +29,8 @@ jobs:
       
       - name: ENV
         run: echo "sdsd" > ${MY_ENV}
-        env: 
-          MY_ENV: ''
+        # env:
+        #   MY_ENV: ''
       
       - name: Get ENV
         run: echo ${MY_VAR}
