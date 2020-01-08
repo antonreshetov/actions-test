@@ -26,6 +26,14 @@ jobs:
 
       - name: Set var
         run: (node -p "require('./package.json').version") > MY_VAR
+      
+      - name: ENV
+        run: echo "sdsd" > ${MY_ENV}
+        env: 
+          MY_ENV: ''
+      
+      - name: Get ENV
+        run: echo ${MY_VAR}
 
 
       # - name: 'Get Previous tag'
@@ -45,5 +53,5 @@ jobs:
         # run: echo ubuntu
       - uses: actions/upload-artifact@v1
         with:
-          name: my-artifact-${{ cat MY_VAR }}
+          name: my-artifact-${{ steps.tagName.outputs.tag }}
           path: path/to/artifact
