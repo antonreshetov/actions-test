@@ -20,6 +20,8 @@ jobs:
       - run: echo hello > path/to/artifact/world.txt
       - run: echo hello > path/to/artifact/world1.txt
 
+      - run: ls -l
+
       - name: Set var
         run: (node -p "require('./package.json').version") > MY_VAR
       
@@ -65,6 +67,7 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: world1
+
       
       - name: Show files
         run: ls -l
