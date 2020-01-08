@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-18.04]
+        os: [windows-latest]
 
     steps:
       - uses: actions/checkout@v1
@@ -28,12 +28,12 @@ jobs:
         run: (node -p "require('./package.json').version") > MY_VAR
       
       - name: ENV
-        run: echo "sdsd" > ${MY_ENV}
+        run: echo "::set-env name=action_state::yellow"
         # env:
         #   MY_ENV: ''
       
       - name: Get ENV
-        run: echo ${MY_VAR}
+        run: echo ${{ env.action_state }}
 
 
       # - name: 'Get Previous tag'
