@@ -25,15 +25,12 @@ jobs:
       #   run: echo ${{ steps.get_version.outputs.VERSION }}
 
       - name: Set var
-        run: |
-          echo "(node -p "require('./package.json').version") > MY_VAR"
-          echo "::set-env name=action_state::$(cat MY_VAR)"
-          echo ${{ env.action_state }}
+        run: (node -p "require('./package.json').version") > MY_VAR
       
       - name: ENV
-        run: echo "::set-env name=action_state::$(cat MY_VAR)"
-        # env:
-        #   MY_ENV: $(cat MY_VAR)
+        run: echo "::set-env name=action_state::$(cat MY_VAR)""
+        env:
+          MY_ENV: $(cat MY_VAR)
       
       - name: Get ENV
         run: echo ${{ env.action_state }}
