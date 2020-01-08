@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [macOS-10.14, ubuntu-18.04]
+        os: [ubuntu-18.04]
 
     steps:
       - uses: actions/checkout@v1
@@ -19,7 +19,7 @@ jobs:
       - name: Get the version
         id: get_version
         # run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
-        run: echo ::set-output name=VERSION::cat package.json | grep version | head -1 | awk -F= "{ print $2 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]'
+        run: echo ::set-output name=VERSION::grep '"version"' package.json | cut -d '"' -f 4
 
       - name: Echo
         run: echo ${{ steps.get_version.outputs.VERSION }}
