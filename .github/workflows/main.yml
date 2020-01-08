@@ -14,11 +14,10 @@ jobs:
     steps:
       - uses: actions/checkout@v1
     
-      - name: Create assets
-        run: mkdir -p path/to/artifact
-        run: echo hello > path/to/artifact/world.txt
-        run: echo hello > path/to/artifact/world1.txt
-        run: echo hello > path/to/artifact/world2.txt
+      - run: mkdir -p path/to/artifact
+      - run: echo hello > path/to/artifact/world.txt
+      - run: echo hello > path/to/artifact/world1.txt
+      - run: echo hello > path/to/artifact/world2.txt
 
       - name: Set var
         run: (node -p "require('./package.json').version") > MY_VAR
